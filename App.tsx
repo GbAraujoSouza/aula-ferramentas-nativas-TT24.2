@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import Home from "./src/pages/Home";
+import Camera from "./src/pages/Camera";
+import LocationPage from "./src/pages/Location";
+
+const Stack = createNativeStackNavigator();
+
+const navHeaderOption = {
+  headerStyle: {
+    backgroundColor: "#232634",
+  },
+  headerTintColor: "#c6d0f5",
+  headerTitleStyle: {
+    color: "#c6d0f5",
+  },
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} options={navHeaderOption} />
+        <Stack.Screen
+          name="Camera"
+          component={Camera}
+          options={navHeaderOption}
+        />
+        <Stack.Screen
+          name="Location"
+          component={LocationPage}
+          options={navHeaderOption}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
